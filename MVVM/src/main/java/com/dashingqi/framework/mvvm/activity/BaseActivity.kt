@@ -20,6 +20,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }, nullAction = {
             setContentView(getLayoutId())
         })
+        performInit()
         initView(savedInstanceState)
     }
 
@@ -41,4 +42,11 @@ abstract class BaseActivity : AppCompatActivity() {
      * @param savedInstanceState Bundle? Bundle对象
      */
     abstract fun initView(savedInstanceState: Bundle?)
+
+    /**
+     * 初始化,不强制实现
+     */
+    open fun performInit(){
+
+    }
 }

@@ -1,6 +1,5 @@
 package com.dashingqi.framework.mvvm.activity
 
-import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.dashingqi.framework.mvvm.ext.getVmClass
 import com.dashingqi.framework.mvvm.viewmodel.BaseViewModel
@@ -23,7 +22,7 @@ abstract class BaseVMActivity<VM : BaseViewModel> : BaseActivity() {
         } ?: ViewModelProvider(this)[vmClass]
     }
 
-    override fun initView(savedInstanceState: Bundle?) {
+    override fun performInit() {
         mViewModel = createViewModel()
     }
 
