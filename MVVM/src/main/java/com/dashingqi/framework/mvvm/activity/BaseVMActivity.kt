@@ -1,4 +1,4 @@
-package com.dashingqi.framework.mvvm
+package com.dashingqi.framework.mvvm.activity
 
 import androidx.lifecycle.ViewModel
 

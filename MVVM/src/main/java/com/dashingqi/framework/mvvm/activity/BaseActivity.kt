@@ -1,9 +1,10 @@
-package com.dashingqi.framework.mvvm
+package com.dashingqi.framework.mvvm.activity
 
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import com.dashingqi.framework.mvvm.ext.notNull
 
 /**
  * @desc : BaseActivity
@@ -14,7 +15,11 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        getLayoutView().notNull(notNullAction = {
+            setContentView(it)
+        }, nullAction = {
+            setContentView(getLayoutId())
+        })
         initView(savedInstanceState)
     }
 
