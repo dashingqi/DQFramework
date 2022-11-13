@@ -3,8 +3,10 @@
 package com.dashingqi.framework.mvvm.ext
 
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
 import java.lang.reflect.ParameterizedType
@@ -55,6 +57,25 @@ fun <VB : ViewBinding> AppCompatActivity.createBindingWithGeneric(
     val bindingClass = getClassWithGeneric<VB>(this, bindingIndex)
     val inflateMethod = bindingClass.getMethod("inflate", LayoutInflater::class.java)
     return (inflateMethod.invoke(null, layoutInflater) as VB).also {
+        if (it is ViewDataBinding) {
+            it.lifecycleOwner = this
+        }
+    }
+}
+
+/**
+ * 创建Binding对象
+ * @receiver Fragment
+ * @param layoutInflater LayoutInflater
+ * @return VB
+ */
+fun <VB : ViewBinding> Fragment.createBindingWithGeneric(
+    layoutInflater: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean, bindingIndex: Int = 0
+): VB {
+    val bindingClass = getClassWithGeneric<VB>(this, bindingIndex)
+    val inflateMethod =
+        bindingClass.getMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.java)
+    return (inflateMethod.invoke(null, layoutInflater,parent,attachToParent) as VB).also {
         if (it is ViewDataBinding) {
             it.lifecycleOwner = this
         }

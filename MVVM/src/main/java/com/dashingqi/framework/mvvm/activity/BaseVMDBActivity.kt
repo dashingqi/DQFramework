@@ -16,6 +16,8 @@ abstract class BaseVMDBActivity<VM : BaseViewModel, DB : ViewDataBinding> : Base
     lateinit var mDataBinding: DB
         private set
 
+    override fun getLayoutId(): Int = 0
+
     /**
      * 获取到布局View
      * @return View?

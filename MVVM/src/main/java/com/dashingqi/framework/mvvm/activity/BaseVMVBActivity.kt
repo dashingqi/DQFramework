@@ -16,6 +16,8 @@ abstract class BaseVMVBActivity<VM : BaseViewModel, VB : ViewBinding> : BaseVMAc
     lateinit var mViewBinding: VB
         private set
 
+    override fun getLayoutId(): Int  = 0
+
     override fun getLayoutView(): View? {
         mViewBinding = createBindingWithGeneric(layoutInflater,1)
         return mViewBinding.root
